@@ -1,0 +1,130 @@
+{
+  "name": "nhl-bracket",
+  "description": "Creates the Stanley cup bracket using nhl.com's api",
+  "tasks": [
+    {
+      "id": "4f18ee3f-6aaa-4466-be23-b8772de33b33",
+      "title": "Create project plan + task board",
+      "description": "OCHO PROJECT BRIEF: Stanley Cup Bracket App\n\nGoal:\nBuild a Node.js app that uses NHL.com’s public API to show a live Stanley Cup Playoffs bracket, series rankings, games, matchups, dates, scores, points, records, series status, and useful matchup context.\n\nPrimary NHL API base:\nhttps://api-web.nhle.com/v1\n\nKey endpoints to use:\n1. Playoff bracket:\n   GET /v1/playoff-bracket/{year}\n\n2. Playoff series overview:\n   GET /v1/playoff-series/carousel/{season}/\n\n3. Playoff series schedule:\n   GET /v1/schedule/playoff-series/{season}/{series_letter}/\n\n4. Current standings:\n   GET /v1/standings/now\n\n5. Schedule:\n   GET /v1/schedule/now\n   GET /v1/schedule/{YYYY-MM-DD}\n\n6. Scores:\n   GET /v1/score/now\n   GET /v1/score/{YYYY-MM-DD}\n\n7. Game detail:\n   GET /v1/gamecenter/{game-id}/landing\n   GET /v1/gamecenter/{game-id}/boxscore\n   GET /v1/gamecenter/{game-id}/play-by-play\n\nReference:\nThe NHL public API exposes playoff bracket, playoff carousel, playoff-series schedule, standings, schedule, score, and gamecenter endpoints through api-web.nhle.com. Use these as the source of truth. NHL’s standings page confirms the Stanley Cup Playoffs use a 16-team set bracket with division-based structure and wild cards. \n\nSource basis: NHL API endpoint references list /playoff-bracket/{year}, /playoff-series/carousel/{season}/, /schedule/playoff-series/{season}/{series_letter}/, /standings/now, schedule, score, and gamecenter endpoints. NHL’s own standings page describes the 16-team playoff format.",
+      "status": "done",
+      "agent": "main",
+      "createdAt": 1777148904231,
+      "updatedAt": 1777155301909
+    },
+    {
+      "id": "5c581568-7608-4705-bf1a-699fbd8afff7",
+      "title": "NHL API research: bracket, playoffs, standings, schedule, game detail + sample payloads",
+      "status": "done",
+      "agent": "cinco",
+      "createdAt": 1777149255078,
+      "updatedAt": 1777155301909
+    },
+    {
+      "id": "c2146ef9-abfa-4f54-84e8-5e352b51240f",
+      "title": "Data model + schemas: Team, Game, Series, Round, Bracket; normalization rules",
+      "status": "done",
+      "agent": "siete",
+      "createdAt": 1777149255078,
+      "updatedAt": 1777155301909
+    },
+    {
+      "id": "b80f35ce-92dd-4c13-8f7d-e06d67f4db15",
+      "title": "Architecture: stack, caching layer, polling/refresh strategy, env/config",
+      "status": "done",
+      "agent": "main",
+      "createdAt": 1777149255078,
+      "updatedAt": 1777160600000
+    },
+    {
+      "id": "c9034514-3999-4da4-931d-9b9a3667d4af",
+      "title": "NHL API client wrapper + retry/backoff + typed responses",
+      "status": "done",
+      "agent": "diez",
+      "createdAt": 1777149255078,
+      "updatedAt": 1777165680000
+    },
+    {
+      "id": "95037be1-c284-411d-a11f-eec410749e2e",
+      "title": "Normalization layer: NHL payloads → internal canonical bracket model",
+      "status": "done",
+      "agent": "diez",
+      "createdAt": 1777149255078,
+      "updatedAt": 1777165680000
+    },
+    {
+      "id": "7b810596-c365-45af-aae3-7dbae6d36351",
+      "title": "Server routes: /, /bracket, /series/:id, /team/:id, JSON endpoints, health/debug",
+      "status": "done",
+      "agent": "diez",
+      "createdAt": 1777149255078,
+      "updatedAt": 1777165680000
+    },
+    {
+      "id": "4a42c1fa-ec3a-4387-8dd1-0fab4a6c675f",
+      "title": "UI: live bracket rendering, responsive, loading/error states, last-updated indicator",
+      "status": "done",
+      "agent": "diez",
+      "description": "UX spec/checklist from siete first",
+      "createdAt": 1777149255078,
+      "updatedAt": 1777165680000
+    },
+    {
+      "id": "431b5cfe-af77-4f71-8331-1f49db3fd01a",
+      "title": "Caching: in-memory + TTL + ETag; rate-limit safety",
+      "status": "done",
+      "agent": "diez",
+      "createdAt": 1777149255078,
+      "updatedAt": 1777165680000
+    },
+    {
+      "id": "eaef4cf4-593d-4143-be4f-86f36fb17167",
+      "title": "QA: acceptance criteria verification + QA script/checklist",
+      "status": "done",
+      "agent": "siete",
+      "createdAt": 1777149255078,
+      "updatedAt": 1777166620000,
+      "description": "docs/qa-checklist.md created; server typecheck+build verified; expand QA once game-id wiring is complete."
+    },
+    {
+      "id": "0ff32032-d03c-4d6d-a0c3-2bd1e8ddbfba",
+      "title": "README + run/deploy instructions",
+      "status": "done",
+      "agent": "main",
+      "createdAt": 1777149255078,
+      "updatedAt": 1777161840000,
+      "description": "Starter README added (run/build instructions)."
+    },
+    {
+      "id": "b7b53fbf-8c13-4b14-9b2e-1f6d6fae2e4b",
+      "title": "Wire gameIds into series + enable /api/game drilldown",
+      "description": "Bracket endpoint lacks per-game IDs. Pull gameIds from playoff-series schedule endpoint; attach games to series response and link UI to /api/game/:gameId.",
+      "status": "done",
+      "agent": "diez",
+      "createdAt": 1777166620000,
+      "updatedAt": 1777166840000,
+      "output": "src/server/routes/drilldown.ts, src/server/services/nhlClient.ts, src/client/App.tsx, src/client/styles.css"
+    },
+    {
+      "id": "21927fba-2497-4b3c-9c31-c043f477bcb3",
+      "title": "Create Git Repo",
+      "description": "Init git and push to GitHub",
+      "status": "doing",
+      "agent": "main",
+      "createdAt": 1777169243383,
+      "updatedAt": 1777171773051
+    },
+    {
+      "id": "2e601418-7b96-47ed-81ab-3ebc2ce45a02",
+      "title": "Create Git Repo",
+      "description": "📋 Kanban task assigned to you in project 'nhl-bracket': \"Create Git Repo\".\n\nInit git and push to GitHub\n\nCheck projects/nhl-bracket/kanban.json — move the card to \"doing\" when you start, \"done\" when complete.",
+      "status": "done",
+      "agent": "main",
+      "runId": "8265152b-a004-4c4b-9a5c-017ec35dca12",
+      "createdAt": 1777171773035,
+      "updatedAt": 1777171793776,
+      "failed": false
+    }
+  ],
+  "createdAt": 1777148621900,
+  "updatedAt": 1777171793776
+}
